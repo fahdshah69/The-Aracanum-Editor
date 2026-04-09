@@ -1,33 +1,58 @@
-# The Arcanum Editor 🖋️
+# The Arcanum Editor — Win32 Text Editor
 
-The Arcanum Editor is a custom built desktop text editor developed using C++ and the Win32 API. It is designed from the ground up to handle text manipulation, dynamic layout configuration, and real-time document parsing without relying on standard GUI text-box controls.
+A custom desktop text editor built in C++ as a university assignment.
 
-## 🚀 Features
+---
 
-* **Dynamic Text Reflow:** Automatically adjusts and wraps text based on configured layout parameters (max columns, max lines per column, and max characters per line).
-* **Real-time Statistics:** Includes built-in word and sentence counting capabilities.
-* **Search Functionality:** Quickly locate specific strings of text within the document structure.
-* **Custom Layout Configuration:** Granular control over the page grid and text boundaries.
+## Disclaimer
 
-## Architecture & Constraints
+This was built for a university assignment with highly specific architectural constraints. The primary goal was to enforce strict Object-Oriented Programming principles rather than building a fully-featured, production-ready text editor. The codebase intentionally avoids standard practices like using multiple header files, global functions, or standard GUI text-box controls to comply with the assignment rules. It works as a proof-of-concept for custom text rendering and OOP hierarchy, but lacks standard modern text editor features.
 
-This project was built adhering to strict Object-Oriented Programming (OOP) principles and specific architectural constraints to ensure encapsulated and modular code:
+---
 
-* **Strict OOP:** Zero global functions are used throughout the entire codebase.
-* **No Inline Keyword:** The `inline` keyword is strictly avoided to enforce proper translation unit compilation.
-* **Consolidated Codebase:** The entire application logic is contained within a single header file (`submission.h`) and executed via `main.cpp`.
+## What It Does
 
-### Data Structure Hierarchy
-The text grid is managed through a deeply nested, custom class hierarchy rather than simple string arrays:
-`Editor` ➔ `Document` ➔ `Page` ➔ `Column` ➔ `Line`
+The application handles text rendering and manipulation entirely from scratch through a custom grid system:
 
-## 🛠️ Getting Started
+### Phase 1 — Data Structure & Hierarchy
+- Abandons standard string arrays in favor of a deeply nested class composition
+- Structures data strictly as: `Editor` ➔ `Document` ➔ `Page` ➔ `Column` ➔ `Line`
+- Completely encapsulates all logic within these object boundaries
 
-### Prerequisites
-* A Windows operating system.
-* A C++ compiler that supports the Win32 API (e.g., MSVC via Visual Studio, or MinGW).
+### Phase 2 — Core Editor Operations
+- **Dynamic Text Reflow** — Automatically adjusts and wraps text based on active layout boundaries
+- **Layout Configuration** — Granular control over the page grid (max columns, max lines per column, and max characters per line)
+- **Search Functionality** — Iterates through the custom data hierarchy to locate specific strings of text
+- **Real-time Statistics** — Parses the document grid to actively count words and sentences
 
-### Building the Project
-1. Clone the repository:
-   ```bash
-   git clone [https://github.com/yourusername/arcanum-editor.git](https://github.com/yourusername/arcanum-editor.git)
+---
+
+## How to Run
+
+1. Open in Visual Studio 2019 or later
+2. Build as a Windows Desktop Application (ensure Win32 libraries like `User32.lib` and `Gdi32.lib` are linked)
+3. Ensure both `main.cpp` and `submission.h` are in the project directory
+4. Compile and run to launch the native Windows GUI
+
+---
+
+## Limitations
+
+- The entire application logic is forced into a single header file (`submission.h`)
+- Zero global functions used (strict university constraint)
+- No support for rich text formatting (bold, italics, varying fonts)
+- Relies purely on the Win32 API for window rendering, meaning it is strictly Windows-only
+- No support for copying and pasting text
+- Can sometimes crash (it is actually rare)
+---
+
+## Libraries Used
+
+Only the following standard headers are used as per assignment constraints:
+
+```cpp
+#include <windows.h>
+#include <iostream>
+---
+*Built for CS-1004 Object Oriented Programming — FAST NUCES, Spring 2026*
+---
